@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 【修改1】：修改浏览器标签栏的标题 -->
+    <title>官-线性代数核心框架知识点</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
+        }
+
+        /* 页面基础样式 */
+        body {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.8;
+            padding-bottom: 50px;
+        }
+
+        /* 头部样式 */
+        header {
+            background-color: #3498db;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* 导航栏样式 - 适配移动端 */
+        nav {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            overflow-x: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #e3f2fd;
+            color: #2980b9;
+        }
+
+        /* 内容容器 */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            display: flex;
+            gap: 30px;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        /* 主要内容区域 */
+        main {
+            flex: 4;
+            min-width: 300px;
+        }
+
+        /* 知识点卡片样式 */
+        .knowledge-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        .knowledge-card h2 {
+            color: #2980b9;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e3f2fd;
+        }
+
+        .knowledge-card h3 {
+            color: #34495e;
+            margin: 15px 0 10px;
+            font-size: 1.1rem;
+        }
+
+        .knowledge-card p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .knowledge-card ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .knowledge-card li {
+            margin-bottom: 8px;
+        }
+
+        /* 公式样式 */
+        .formula {
+            background-color: #f1f9ff;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-family: "Consolas", "Monaco", monospace;
+            color: #2c3e50;
+            border-left: 4px solid #3498db;
+        }
+
+        /* 侧边栏（公式速查） */
+        aside {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 80px;
+            align-self: flex-start;
+        }
+
+        aside h2 {
+            color: #2980b9;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e3f2fd;
+        }
+
+        .formula-item {
+            margin-bottom: 12px;
+        }
+
+        .formula-item strong {
+            color: #34495e;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            aside {
+                position: static;
+            }
+            header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面头部 -->
+    <header>
+        <!-- 【修改2】：修改页面顶部显示的标题 -->
+        <h1>官-线性代数核心框架知识点</h1>
+        <p>系统梳理线性代数的核心概念、公式与应用场景</p>
+    </header>
+
+    <!-- 导航栏（锚点链接） -->
+    <nav>
+        <ul>
+            <li><a href="#vector-matrix">向量与矩阵</a></li>
+            <li><a href="#linear-equation">线性方程组</a></li>
+            <li><a href="#eigen">特征值与特征向量</a></li>
+            <li><a href="#linear-transform">线性变换</a></li>
+            <li><a href="#quadratic-form">二次型</a></li>
+            <li><a href="#application">核心应用</a></li>
+        </ul>
+    </nav>
+
+    <!-- 主体内容容器 -->
+    <div class="container">
+        <!-- 主要知识点内容 -->
+        <main>
+            <!-- 1. 向量与矩阵 -->
+            <section id="vector-matrix" class="knowledge-card">
+                <h2>一、向量与矩阵（线性代数的基础）</h2>
+                <h3>1.1 核心概念</h3>
+                <ul>
+                    <li>向量：n维有序数组，分为行向量、列向量，代表n维空间中的点/向量</li>
+                    <li>矩阵：m×n个数排成的m行n列的数表，记为Aₘₙ</li>
+                    <li>特殊矩阵：单位矩阵E、零矩阵O、对角矩阵、对称矩阵、正交矩阵</li>
+                    <li>矩阵的秩：矩阵中最高阶非零子式的阶数，记为r(A)</li>
+                </ul>
+
+                <h3>1.2 核心运算</h3>
+                <ul>
+                    <li>矩阵加法：同型矩阵对应元素相加</li>
+                    <li>数乘矩阵：数k乘以矩阵每个元素</li>
+                    <li>矩阵乘法：Aₘₙ × Bₙₚ = Cₘₚ（第一个矩阵列数=第二个矩阵行数）</li>
+                    <li>矩阵转置：Aᵀ（行变列、列变行），性质：(AB)ᵀ = BᵀAᵀ</li>
+                    <li>矩阵求逆：可逆矩阵A满足AA⁻¹=A⁻¹A=E，仅方阵可能可逆</li>
+                </ul>
+
+                <div class="formula">
+                    可逆矩阵判定：|A| ≠ 0（行列式非零），r(A) = n（满秩）
+                </div>
+            </section>
+
+            <!-- 2. 线性方程组 -->
+            <section id="linear-equation" class="knowledge-card">
+                <h2>二、线性方程组（核心应用场景）</h2>
+                <h3>2.1 方程组形式</h3>
+                <p>一般形式：AₘₙX = b（非齐次）；AₘₙX = 0（齐次）</p>
+                <div class="formula">
+                    齐次方程组AX=0：总有解（至少零解）；非零解 ⇨ r(A) &lt; n
+                </div>
+                <div class="formula">
+                    非齐次方程组AX=b：有解 ⇨ r(A) = r(A|b)；唯一解 ⇨ r(A)=r(A|b)=n；无穷解 ⇨ r(A)=r(A|b)&lt;n
+                </div>
+
+                <h3>2.2 求解方法</h3>
+                <ul>
+                    <li>消元法：通过初等行变换将增广矩阵(A|b)化为行阶梯形/行最简形</li>
+                    <li>基础解系：齐次方程组AX=0的解空间的一组基，含n-r(A)个线性无关的解向量</li>
+                    <li>通解结构：非齐次通解 = 齐次通解 + 非齐次特解</li>
+                </ul>
+            </section>
+
+            <!-- 3. 特征值与特征向量 -->
+            <section id="eigen" class="knowledge-card">
+                <h2>三、特征值与特征向量（矩阵的核心属性）</h2>
+                <h3>3.1 定义</h3>
+                <p>对于n阶方阵A，若存在数λ和非零向量α，使得Aα = λα，则λ为特征值，α为对应特征向量</p>
+                <div class="formula">
+                    特征方程：|λE - A| = 0（特征多项式）；特征向量：(λE - A)X = 0的非零解
+                </div>
+
+                <h3>3.2 核心性质</h3>
+                <ul>
+                    <li>特征值之和 = 矩阵迹（主对角线元素和）：∑λᵢ = tr(A) = a₁₁+a₂₂+…+aₙₙ</li>
+                    <li>特征值之积 = 矩阵行列式：∏λᵢ = |A|</li>
+                    <li>相似矩阵：P⁻¹AP = B ⇒ A与B特征值相同</li>
+                    <li>矩阵对角化：A可对角化 ⇨ A有n个线性无关的特征向量</li>
+                </ul>
+
+                <div class="formula">
+                    实对称矩阵：特征值全为实数，不同特征值的特征向量正交，必可对角化
+                </div>
+            </section>
+
+            <!-- 4. 线性变换 -->
+            <section id="linear-transform" class="knowledge-card">
+                <h2>四、线性变换（线性代数的几何本质）</h2>
+                <h3>4.1 核心概念</h3>
+                <ul>
+                    <li>线性变换：T(α+β)=T(α)+T(β)，T(kα)=kT(α)（保持线性运算）</li>
+                    <li>线性变换的矩阵表示：在一组基下，线性变换对应唯一矩阵</li>
+                    <li>基变换与坐标变换：不同基下，同一向量的坐标满足X = PX'（P为过渡矩阵）</li>
+                </ul>
+
+                <h3>4.2 几何意义</h3>
+                <ul>
+                    <li>矩阵乘法 = 线性变换的复合</li>
+                    <li>特征向量 = 线性变换下方向不变的向量（仅伸缩）</li>
+                    <li>正交变换：保持向量长度、夹角不变（如旋转、镜像）</li>
+                </ul>
+            </section>
+
+            <!-- 5. 二次型 -->
+            <section id="quadratic-form" class="knowledge-card">
+                <h2>五、二次型（二次齐次多项式的矩阵表示）</h2>
+                <h3>5.1 定义与表示</h3>
+                <p>二次型：f(x₁,x₂,…,xₙ) = ∑∑aᵢⱼxᵢxⱼ（i,j=1到n），矩阵表示：f = XᵀAX（A为对称矩阵）</p>
+                <div class="formula">
+                    标准形：f = λ₁y₁² + λ₂y₂² + … + λₙyₙ²（仅含平方项）
+                </div>
+
+                <h3>5.2 核心考点</h3>
+                <ul>
+                    <li>化标准形方法：配方法、正交变换法（常用）</li>
+                    <li>惯性定理：标准形中正负惯性指数（正负特征值个数）唯一</li>
+                    <li>正定二次型：对任意非零X，XᵀAX &gt; 0 ⇨ A的特征值全正 ⇨ 各阶顺序主子式全正</li>
+                </ul>
+            </section>
+
+            <!-- 6. 核心应用 -->
+            <section id="application" class="knowledge-card">
+                <h2>六、线性代数核心应用场景</h2>
+                <ul>
+                    <li>机器学习：特征降维（PCA）、线性回归、矩阵分解（SVD）</li>
+                    <li>图像处理：图像变换、压缩（基于矩阵运算）</li>
+                    <li>工程计算：电路分析、力学系统建模、信号处理</li>
+                    <li>数据分析：线性方程组求解、矩阵求逆用于参数估计</li>
+                </ul>
+            </section>
+        </main>
+
+        <!-- 侧边栏：核心公式速查 -->
+        <aside>
+            <h2>核心公式速查</h2>
+            <div class="formula-item">
+                <strong>矩阵求逆</strong>：A⁻¹ = (1/|A|)A*（A*为伴随矩阵）
+            </div>
+            <div class="formula-item">
+                <strong>行列式展开</strong>：|A| = ∑aᵢⱼAᵢⱼ（按第i行展开）
+            </div>
+            <div class="formula-item">
+                <strong>特征值和</strong>：∑λᵢ = a₁₁+a₂₂+…+aₙₙ
+            </div>
+            <div class="formula-item">
+                <strong>秩的性质</strong>：r(AB) ≤ min{r(A), r(B)}
+            </div>
+            <div class="formula-item">
+                <strong>正交矩阵</strong>：AᵀA = AAᵀ = E ⇒ |A|=±1
+            </div>
+            <div class="formula-item">
+                <strong>齐次解空间维数</strong>：dim = n - r(A)
+            </div>
+        </aside>
+    </div>
+</body>
+</html>
